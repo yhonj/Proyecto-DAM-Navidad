@@ -10,6 +10,15 @@ import org.hibernate.Session;
 
 public class UsuarioDAO {
 
+    public static Usuario buscarPorUsername(String username) {
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            return session.createQuery(
+                    "FROM Usuario WHERE username = :u", Usuario.class)
+                    .setParameter("u", username)
+                    .uniqueResult();
+        }
+    }
+
     public static boolean guardar(Usuario u) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             session.beginTransaction();
@@ -21,26 +30,19 @@ public class UsuarioDAO {
             return false;
         }
     }
-    
-    
-    public static Usuario buscarPorUsername(String username) {
-    try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-        return session
-                .createQuery("FROM Usuario WHERE username = :u", Usuario.class)
-                .setParameter("u", username)
-                .uniqueResult();
-    }
-}
-    public static boolean existeEmail(String email) {
-    try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-        Long count = session.createQuery(
-                "SELECT COUNT(u) FROM Usuario u WHERE u.email = :e",
-                Long.class
-        ).setParameter("e", email)
-         .uniqueResult();
 
-        return count != null && count > 0;
+
+
+    public static boolean existeEmail(String email) {
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            Long count = session.createQuery(
+                    "SELECT COUNT(u) FROM Usuario u WHERE u.email = :e",
+                    Long.class
+            ).setParameter("e", email)
+                    .uniqueResult();
+
+            return count != null && count > 0;
+        }
     }
-}
 
 }

@@ -22,17 +22,17 @@ public class RegistroControlador {
 
     public RegistroResult registrar(String username, String password, String email) {
 
-        // 1️⃣ Campos vacíos
+        // Campos vacíos
         if (username.isBlank() || password.isBlank() || email.isBlank()) {
             return RegistroResult.CAMPOS_VACIOS;
         }
 
-        // 2️⃣ Email ya existe
+        // Email ya existe
         if (UsuarioDAO.existeEmail(email)) {
             return RegistroResult.EMAIL_EXISTE;
         }
 
-        // 3️⃣ Crear usuario
+        //Crear usuario
         Usuario u = new Usuario();
         u.setUsername(username);
         u.setEmail(email);

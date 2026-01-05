@@ -3,18 +3,27 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package com.yhon.dam.proyectodamnavidad;
+
 import com.yhon.dam.proyectodamnavidad.controller.LoginControlador;
 import com.yhon.dam.proyectodamnavidad.controller.LoginControlador.LoginResult;
+import com.yhon.dam.proyectodamnavidad.modelo.Usuario;
 import javax.swing.JOptionPane;
 import com.yhon.dam.proyectodamnavidad.vista.RegistroVista;
-
+import com.yhon.dam.proyectodamnavidad.vista.TareasVista;
+import java.awt.Font;
+import java.awt.font.TextAttribute;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author yhon
  */
 public class MainFrame extends javax.swing.JFrame {
-    
+
+    private Font label4NormalFont;
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(MainFrame.class.getName());
 
     /**
@@ -22,6 +31,8 @@ public class MainFrame extends javax.swing.JFrame {
      */
     public MainFrame() {
         initComponents();
+        label4NormalFont = jLabel4.getFont();
+
     }
 
     /**
@@ -69,6 +80,23 @@ public class MainFrame extends javax.swing.JFrame {
 
         jLabel4.setFont(new java.awt.Font("Liberation Sans", 0, 12)); // NOI18N
         jLabel4.setText("He olvidado mi contraseña");
+        jLabel4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel4.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jLabel4FocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jLabel4FocusLost(evt);
+            }
+        });
+        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabel4MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabel4MouseExited(evt);
+            }
+        });
 
         jMenu4.setText("Registrarse");
         jMenu4.addActionListener(new java.awt.event.ActionListener() {
@@ -136,8 +164,7 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        
-    String username = jTextField1.getText();
+ String username = jTextField1.getText();
     String password = new String(jPasswordField1.getPassword());
 
     LoginControlador controller = new LoginControlador();
@@ -145,49 +172,74 @@ public class MainFrame extends javax.swing.JFrame {
 
     switch (result) {
         case OK:
-            JOptionPane.showMessageDialog(this,
-                    "Inicio de sesión correcto");
+            Usuario usuario = controller.getUsuarioLogueado();
+
+            TareasVista vista = new TareasVista(usuario);
+            vista.setLocationRelativeTo(this);
+            vista.setVisible(true);
+
+            this.dispose(); // cerrar login
             break;
 
         case USER_NOT_FOUND:
             JOptionPane.showMessageDialog(this,
-                    "El usuario no existe o está mal escrito",
-                    "Usuario no encontrado",
+                    "El usuario no existe",
+                    "Error de login",
                     JOptionPane.WARNING_MESSAGE);
             break;
 
         case WRONG_PASSWORD:
             JOptionPane.showMessageDialog(this,
-                    "La contraseña es incorrecta",
-                    "Error de autenticación",
+                    "Contraseña incorrecta",
+                    "Error de login",
                     JOptionPane.ERROR_MESSAGE);
             break;
     }
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jMenu4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu4ActionPerformed
         // TODO add your handling code here:
-         RegistroVista registro = new RegistroVista();
-    registro.setLocationRelativeTo(this); // centrado respecto al login
-    registro.setVisible(true);
+        RegistroVista registro = new RegistroVista();
+        registro.setLocationRelativeTo(this); // centrado respecto al login
+        registro.setVisible(true);
     }//GEN-LAST:event_jMenu4ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         // TODO add your handling code here:
         RegistroVista registro = new RegistroVista();
-    registro.setLocationRelativeTo(this);
-    registro.setVisible(true);
+        registro.setLocationRelativeTo(this);
+        registro.setVisible(true);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jLabel4FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jLabel4FocusGained
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_jLabel4FocusGained
+
+    private void jLabel4FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jLabel4FocusLost
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_jLabel4FocusLost
+
+    private void jLabel4MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseEntered
+        // TODO add your handling code here:
+        Map<TextAttribute, Object> attributes
+                = new HashMap<>(label4NormalFont.getAttributes());
+        attributes.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
+
+        jLabel4.setFont(label4NormalFont.deriveFont(attributes));
+    }//GEN-LAST:event_jLabel4MouseEntered
+
+    private void jLabel4MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseExited
+        // TODO add your handling code here:
+        jLabel4.setFont(label4NormalFont);
+    }//GEN-LAST:event_jLabel4MouseExited
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -195,12 +247,10 @@ public class MainFrame extends javax.swing.JFrame {
                     break;
                 }
             }
-        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
-            logger.log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
-        //</editor-fold>
 
-        /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> new MainFrame().setVisible(true));
     }
 

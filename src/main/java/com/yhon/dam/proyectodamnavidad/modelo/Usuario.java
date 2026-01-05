@@ -51,4 +51,9 @@ public class Usuario {
         return email;
     }
 
+    @Override
+    public String toString() {
+        return username;
+    }
+
 }

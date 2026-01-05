@@ -11,30 +11,28 @@ import com.yhon.dam.proyectodamnavidad.util.PasswordUtil;
  * @author yhon
  */
 public class LoginControlador {
-    
-public enum LoginResult {
-        OK,
-        USER_NOT_FOUND,
-        WRONG_PASSWORD
+
+      public enum LoginResult {
+        OK, USER_NOT_FOUND, WRONG_PASSWORD
     }
 
+    private Usuario usuarioLogueado;
+
     public LoginResult login(String username, String password) {
+        Usuario u = UsuarioDAO.buscarPorUsername(username);
 
-        Usuario usuario = UsuarioDAO.buscarPorUsername(username);
+        if (u == null) return LoginResult.USER_NOT_FOUND;
 
-        if (usuario == null) {
-            return LoginResult.USER_NOT_FOUND;
-        }
-
-        boolean passwordOk = PasswordUtil.checkPassword(
-                password,
-                usuario.getPasswordHash()
-        );
-
-        if (!passwordOk) {
+        if (!PasswordUtil.checkPassword(password, u.getPasswordHash())) {
             return LoginResult.WRONG_PASSWORD;
         }
 
+        usuarioLogueado = u;
         return LoginResult.OK;
     }
+
+    public Usuario getUsuarioLogueado() {
+        return usuarioLogueado;
+    }
 }
+
