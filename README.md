@@ -79,7 +79,7 @@ Utilidades: Gestión de Hibernate y detección de base de datos
 
 Esta separación facilita el mantenimiento, la ampliación y la comprensión del código.
 
-6. Requisitos del sistema
+6. Requisitos 
 Requisitos mínimos
 
 Sistema operativo Windows, Linux o macOS
@@ -95,6 +95,8 @@ Requisitos adicionales (opcional)
 Docker
 
 Docker Compose
+
+Ganas de usarlo
 
 7. Funcionamiento general del programa
 
