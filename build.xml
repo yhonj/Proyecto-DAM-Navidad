@@ -2,8 +2,8 @@
 <launch4jConfig>
   <dontWrapJar>false</dontWrapJar>
   <headerType>gui</headerType>
-  <jar>/home/yhon/NetBeansProjects/ProyectoDAMNavidad/target/ProyectoDAMNavidad-1.0-SNAPSHOT.jar</jar>
-  <outfile>/home/yhon/NetBeansProjects/ProyectoDAMNavidad/target/GestorDeTareasFamilias.exe</outfile>
+  <jar>/home/dell/NetBeansProjects/Proyecto-DAM-Navidad/ProyectoDAMNavidad-1.0-SNAPSHOT.jar</jar>
+  <outfile>/home/dell/Documentos/FamalyTask.exe</outfile>
   <errTitle></errTitle>
   <cmdLine></cmdLine>
   <chdir>.</chdir>
@@ -13,12 +13,12 @@
   <stayAlive>false</stayAlive>
   <restartOnCrash>false</restartOnCrash>
   <manifest></manifest>
-  <icon>/home/yhon/Descargas/appico.ico</icon>
+  <icon>/home/dell/Descargas/feliz.ico</icon>
   <jre>
     <path>%JAVA_HOME%;%PATH%</path>
     <requiresJdk>false</requiresJdk>
     <requires64Bit>false</requires64Bit>
-    <minVersion>17</minVersion>
+    <minVersion></minVersion>
     <maxVersion></maxVersion>
   </jre>
 </launch4jConfig>
